@@ -15,24 +15,24 @@ var {
 /**
  * 自定义手机号码验证机制
  */
-var Phone = t.refinement(t.Number, function(value){
+const Cellphone = t.refinement(t.Number, function(value){
 	return ValidateUtil.isPhone(value);
 });
 
 /**
  * 获取验证错误消息信息
  */
-Phone.getValidationErrorMessage = function(value, path, context) {
+Cellphone.getValidationErrorMessage = function(value, path, context) {
 	return '手机号码格式有误！';
 };
 
-var options = {
+const options = {
 	fields: {
 		phone: {
 			label: '',
 			placeholder: '手机号码',
 			maxLength: 11,
-			error: '请输入验证码',
+			error: '请输入手机号码',
 		},
 		vertify: {
 			label: '',
@@ -45,7 +45,7 @@ var options = {
 }
 
 var Reserve = t.struct({
-	phone: Phone,
+	phone: Cellphone,
 	vertify: t.String,
 });
 
