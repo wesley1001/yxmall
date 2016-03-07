@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var ValidateUtil = require('../utils/validateUtils.js');
 var t = require('tcomb-form-native');
 var Form = t.form.Form;
 
@@ -11,10 +12,19 @@ var {
 	TouchableHighlight,
 } = React;
 
-var Reserve = t.struct({
-	phone: t.String,
-	vertify: t.String,
+/**
+ * 自定义手机号码验证机制
+ */
+var Phone = t.refinement(t.Number, function(value){
+	return ValidateUtil.isPhone(value);
 });
+
+/**
+ * 获取验证错误消息信息
+ */
+Phone.getValidationErrorMessage = function(value, path, context) {
+	return '手机号码格式有误！';
+};
 
 var options = {
 	fields: {
@@ -22,7 +32,7 @@ var options = {
 			label: '',
 			placeholder: '手机号码',
 			maxLength: 11,
-			error: '手机号码有误'
+			error: '请输入验证码',
 		},
 		vertify: {
 			label: '',
@@ -33,6 +43,11 @@ var options = {
 	},
 	auto: 'none'
 }
+
+var Reserve = t.struct({
+	phone: Phone,
+	vertify: t.String,
+});
 
 /**
  * 免费设计
@@ -63,7 +78,7 @@ var FreeDesign = React.createClass({
 	},
 
 	_onChange: function(value) {
-		console.log(value);
+		console.log('onChange ', value);
 	},
 
 	_clearForm: function() {

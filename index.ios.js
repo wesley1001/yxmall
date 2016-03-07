@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var Index = require('./app/index.js');
+var Index = require('./app/ios_src/index.js');
 
 var {
   AppRegistry
