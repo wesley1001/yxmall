@@ -23,7 +23,7 @@ var Index = React.createClass({
 
   getInitialState: function() {
     return {
-      selectedTab: 'freedesign',
+      selectedTab: 'shopcar',
     };
   },
 

@@ -2,30 +2,40 @@
 
 var React = require('react-native');
 
+var MyShopcar = require('../components/MyShopcar.js')
+
 var {
 	View,
 	Text,
-	WebView,
+	NavigatorIOS,
 } = React;
 
 /**
  * 购物车
  */
 module.exports = React.createClass({
+
+	getInitialState: function() {
+		return {
+			dataList: []
+		};
+	},
+
 	render: function() {
+		var initialRoute = {
+			component: MyShopcar,
+			title: '我的购物车',
+			passProps: {...this.props}
+		};
 		return (
-			<WebView
-				ref='ref'
-				url='http://m.yuexing.com/my/?mod=cart'
-				renderError={this._renderError}
+			<NavigatorIOS
+				ref='shopcarNav'
+				initialRoute={initialRoute}
+				style={{
+					flex: 1
+				}}
 			/>
 		);
 	},
 
-	_renderError: function() {
-		AlertIOS.alert('温馨提示', '网络实在是太慢了！', [{
-			text: '确定',
-			onPress: () => console.log('按钮按下事件!')
-		}]);
-	},
 });
