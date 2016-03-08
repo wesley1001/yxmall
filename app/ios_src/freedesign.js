@@ -2,52 +2,14 @@
 
 var React = require('react-native');
 var ValidateUtil = require('../utils/validateUtils.js');
-var t = require('tcomb-form-native');
-var Form = t.form.Form;
 
 var {
 	View,
 	StyleSheet,
 	Text,
 	TouchableHighlight,
+	TextInput,
 } = React;
-
-/**
- * 自定义手机号码验证机制
- */
-const Cellphone = t.refinement(t.Number, function(value){
-	return ValidateUtil.isPhone(value);
-});
-
-/**
- * 获取验证错误消息信息
- */
-Cellphone.getValidationErrorMessage = function(value, path, context) {
-	return '手机号码格式有误！';
-};
-
-const options = {
-	fields: {
-		phone: {
-			label: '',
-			placeholder: '手机号码',
-			maxLength: 11,
-			error: '请输入手机号码',
-		},
-		vertify: {
-			label: '',
-			placeholder: '手机上收到的验证码',
-			maxLength: 4,
-			error: '验证码错误'
-		}
-	},
-	auto: 'none'
-}
-
-var Reserve = t.struct({
-	phone: Cellphone,
-	vertify: t.String,
-});
 
 /**
  * 免费设计
@@ -55,26 +17,22 @@ var Reserve = t.struct({
 var FreeDesign = React.createClass({
 
 	getInitialState: function() {
-		return { };
+		return {
+			phone: '',
+			vertify: '',
+			isPhoneCorrect: false,
+			isVertifyCorrect: false,
+			vertifyText: '验证'
+		};
 	},
 
-	render: function() {
-		return (
-			<View style={styles.container}>
-				<Text style={styles.title}>月星免费软装设计</Text>
-				<Text style={styles.subtitle}>暂仅限上海，其他城市陆续开放</Text>
-				<Form
-					ref='form'
-					type={Reserve}
-					options={options}
-					value={this.state.value}
-					onChange={this._onChange}
-				/>
-				<TouchableHighlight style={styles.button} onPress={this._onPress} underlayColor='#99d9f4'>
-					<Text style={styles.buttonText}>立即预约</Text>
-				</TouchableHighlight>
-			</View>
-		);
+	_phoneChangeText: function(text) {
+		var code = this.refs.vertify._getText();
+		this.setState({
+			phone: text,
+			isPhoneCorrect: ValidateUtil.isCellphone(text),
+			isVertifyCorrect: ValidateUtil.isVertify(code)
+		});
 	},
 
 	_onChange: function(value) {
@@ -85,13 +43,76 @@ var FreeDesign = React.createClass({
 		this.setState({value:null});
 	},
 
+	_getCode: function(event) {
+		//倒计时
+		var countdown = 30;
+		this.timer = setInterval(function(){
+			this.setState({
+				vertifyText: countdown--
+			});
+		}.bind(this), 1000);
+	},
+
 	_onPress: function(event) {
-		var value = this.refs.form.getValue();
-		if (value) {
-			console.log('vlaue ', value);
-			// _clearForm();
-		}
-	}
+		var phone = this.refs.phone._getText();
+		var vertify = this.refs.vertify._getText();
+		console.log('phone ' + phone + ', vertify ' + vertify);
+		debugger;
+	},
+
+	_vertifyChangeText: function(text) {
+		var phone = this.refs.phone._getText();
+		this.setState({
+			vertify: text,
+			isPhoneCorrect: ValidateUtil.isCellphone(phone),
+			isVertifyCorrect: ValidateUtil.isVertify(text)
+		});
+	},
+
+	render: function() {
+		return (
+			<View style={styles.container}>
+				<Text style={styles.title}>月星免费软装设计</Text>
+				<Text style={styles.subtitle}>暂仅限上海，其他城市陆续开放</Text>
+				<View style={styles.formContainer}>
+					<View style={styles.row1}>
+						<TextInput ref='phone'
+							style={styles.phoneInput}
+							maxLength={11}
+							keyboardType='numeric'
+							onChangeText={this._phoneChangeText}
+							placeholder='输入您的手机号码'
+							value={this.state.phone}
+						/>
+						<TouchableHighlight
+							ref='codeBtn'
+							style={[styles.vertifyBtn, this.state.isPhoneCorrect ? styles.available : null]}
+							onPress={this._getCode}
+							accessible={false}
+							underlayColor='#ff6633'>
+							<Text style={styles.vertifyText}>{this.state.vertifyText}</Text>
+						</TouchableHighlight>
+					</View>
+					<View style={styles.row2}>
+						<TextInput ref='vertify'
+							style={styles.vertifyInput}
+							maxLength={4}
+							keyboardType='numeric'
+							onChangeText={this._vertifyChangeText}
+							placeholder='手机上收到的短信'
+							value={this.state.vertify}
+						/>
+					</View>
+				</View>
+				<TouchableHighlight
+					style={[styles.button, this.state.isVertifyCorrect ? styles.available : null]}
+					onPress={this._onPress}
+					underlayColor='#ff6633'>
+					<Text style={styles.buttonText}>立即预约</Text>
+				</TouchableHighlight>
+			</View>
+		);
+	},
 
 });
 
@@ -112,13 +133,30 @@ var styles = StyleSheet.create({
 		fontSize: 16,
 		alignSelf: 'center',
 		color: '#888888',
-		marginBottom: 20,
+	},
+	formContainer: {marginTop:20},
+	row1: {flex:1,flexDirection:'row',height:40},
+	row2: {flex:1,height:40,marginBottom:7,marginTop:7},
+	phoneInput: {flex:3,borderColor:'#C2BDBF',borderWidth:1,borderStyle:'solid',borderRadius:5},
+	vertifyBtn: {
+		flex:1,
+		backgroundColor:'#ddd',
+		alignItems:'center',
+		justifyContent:'center',
+		borderRadius:5,
+		marginLeft:7
+	},
+	vertifyText: {fontSize:18,color:'#fff'},
+	vertifyInput: {
+		flex:1,
+		borderColor:'#C2BDBF',
+		borderWidth:1,
+		borderStyle:'solid',
+		borderRadius:5
 	},
 	button: {
-		height: 36,
-		backgroundColor: '#48BBEC',
-		borderColor: '#48BBEC',
-		borderWidth: 1,
+		height: 40,
+		backgroundColor: '#ddd',
 		borderRadius: 8,
 		marginBottom: 10,
 		alignSelf: 'stretch',
@@ -128,6 +166,9 @@ var styles = StyleSheet.create({
 		fontSize: 18,
 		color: 'white',
 		alignSelf: 'center'
+	},
+	available: {
+		backgroundColor: '#ff6600'
 	}
 });
 
