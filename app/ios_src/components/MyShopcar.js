@@ -3,7 +3,7 @@
 var React = require('react-native');
 // var {Checkbox, Radio} = require('react-icheck/lib/Checkbox.js');
 // import 'icheck/skins/all.css';
-import {Checkbox, Radio} from 'react-icheck';
+// var {Checkbox, Radio} = require('react-icheck');
 
 var {
 	StyleSheet,
@@ -67,7 +67,6 @@ var MyShopcar = React.createClass({
 		return (
 			<View style={styles.rowContainer}>
 				<View style={styles.rowHeader}>
-					<Text></Text>
 				</View>
 				<View style={styles.rowBody}>
 					<Text>这里是主体</Text>
