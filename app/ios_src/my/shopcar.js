@@ -8,6 +8,7 @@ var {
 	View,
 	Text,
 	NavigatorIOS,
+	StyleSheet,
 } = React;
 
 /**
@@ -31,11 +32,15 @@ module.exports = React.createClass({
 			<NavigatorIOS
 				ref='shopcarNav'
 				initialRoute={initialRoute}
-				style={{
-					flex: 1
-				}}
+				style={styles.navgiatorCar}
 			/>
 		);
 	},
 
+});
+
+const styles = StyleSheet.create({
+	navgiatorCar: {
+		flex: 1,
+	}
 });
