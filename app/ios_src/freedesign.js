@@ -77,7 +77,7 @@ var FreeDesign = React.createClass({
 				<View style={styles.formContainer}>
 					<View style={styles.row1}>
 						<TextInput ref='phone'
-							style={styles.phoneInput}
+							style={[styles.baseInput, styles.phoneInput]}
 							maxLength={11}
 							keyboardType='numeric'
 							onChangeText={this._phoneChangeText}
@@ -95,7 +95,7 @@ var FreeDesign = React.createClass({
 					</View>
 					<View style={styles.row2}>
 						<TextInput ref='vertify'
-							style={styles.vertifyInput}
+							style={[styles.baseInput, styles.vertifyInput]}
 							maxLength={4}
 							keyboardType='numeric'
 							onChangeText={this._vertifyChangeText}
@@ -137,7 +137,13 @@ var styles = StyleSheet.create({
 	formContainer: {marginTop:20},
 	row1: {flex:1,flexDirection:'row',height:40},
 	row2: {flex:1,height:40,marginBottom:7,marginTop:7},
-	phoneInput: {flex:3,borderColor:'#C2BDBF',borderWidth:1,borderStyle:'solid',borderRadius:5},
+	baseInput: {
+		borderColor:'#ddd',
+		borderWidth:1,
+		borderStyle:'solid',
+		borderRadius:7,
+	},
+	phoneInput: {flex:3},
 	vertifyBtn: {
 		flex:1,
 		backgroundColor:'#ddd',
@@ -149,10 +155,6 @@ var styles = StyleSheet.create({
 	vertifyText: {fontSize:18,color:'#fff'},
 	vertifyInput: {
 		flex:1,
-		borderColor:'#C2BDBF',
-		borderWidth:1,
-		borderStyle:'solid',
-		borderRadius:5
 	},
 	button: {
 		height: 40,
