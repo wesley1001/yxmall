@@ -1,7 +1,15 @@
 'use strict';
 
+const BANNER_IMGS = [
+	require('../../../images/banner/1.jpg'),
+	require('../../../images/banner/2.jpg'),
+	require('../../../images/banner/3.jpg'),
+	require('../../../images/banner/4.jpg'),
+	require('../../../images/banner/5.jpg')
+]
+
 var React = require('react-native');
-var Swiper = require('react-native-swiper');
+var ViewPager = require('react-native-viewpager');
 
 var {
 	StyleSheet,
@@ -13,24 +21,23 @@ var {
 module.exports = React.createClass({
 
 	getInitialState: function() {
+		var ds = new ViewPager.DataSource({
+			pageHasChanged: (p1, p2) => p1 !== p2
+		});
 		return {
-			sliderImgs: [
-				{uri: 'http://www.yuexing.com/static/data/files/mall/ad/logo/394.jpg'},
-				{uri: 'http://www.yuexing.com/static/data/files/mall/ad/logo/396.jpg'},
-				{uri: 'http://www.yuexing.com/static/data/files/mall/ad/logo/384.jpg'},
-				{uri: 'http://www.yuexing.com/static/data/files/mall/ad/logo/320.jpg'},
-			]
+			dataSource: ds.cloneWithPages(BANNER_IMGS)
 		}
 	},
 
 	render: function() {
-		var slides = this.state.sliderImgs.map(function(item, index){
-			return <Image key={'swiper' + index} style={styles.slide} source={item}/>;
-		});
 		return (
-			<Swiper style={styles.wrapper} height={240} autoplay={true} autoplayTimeout={3}>
-				{slides}
-	        </Swiper>
+			<ViewPager style={styles.wrapper}
+				dataSource={this.state.dataSource}
+				renderPage={(data, pageId) => {
+					return <Image source={data} style={styles.slide}/>
+				}}
+				isLoop={true}
+				autoPlay={true}/>
 		);
 	}
 
@@ -38,9 +45,11 @@ module.exports = React.createClass({
 
 var styles = StyleSheet.create({
 	wrapper: {
+		flex: 1
 	},
 	slide: {
-		flex: 1,
-		resizeMode: 'stretch'
+		flex:1,
+		height:250,
+		resizeMode:'stretch'
 	}
 });

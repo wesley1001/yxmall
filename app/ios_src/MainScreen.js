@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var { TabBarIOS, } = require('react-native-icons');
+var { TabBarIOS } = require('react-native-icons');
 var TabBarItemIOS = TabBarIOS.Item;
 
 var Home = require('./Home.js');
@@ -30,28 +30,26 @@ var MainScreen = React.createClass({
 
   render: function() {
     return (
-        <View style={styles.container}>
-            <SearchBar/>
-            <TabBarIOS selectedTab={this.state.selectedTab} tintColor='#ff6600' barTintColor='#fff' style={styles.tabBar}>
-              <TabBarItemIOS name='home' iconName='ion|ios-home-outline' selectedIconName='ion|ios-home' title={'首页'} iconSize={28} selectedIconSize={30} accessibilityLabel='Home Tab' selected={this.state.selectedTab === 'home'} onPress={() => this.setState({selectedTab:'home'})}>
-                <Home/>
-              </TabBarItemIOS>
-              <TabBarItemIOS name='threed' iconName='ion|ios-location-outline' selectedIconName='ion|ios-location' title='3d商城' iconSize={28} selectedIconSize={30} accessibilityLabel='3D Tab' selected={this.state.selectedTab === 'threed'} onPress={() => this.setState({selectedTab:'threed'})}>
-                <D3/>
-              </TabBarItemIOS>
-              <TabBarItemIOS name='freedesign' iconName='ion|ios-compose-outline' selectedIconName='ion|ios-compose' title='免费设计' iconSize={28} selectedIconSize={30} accessibilityLabel='FreeDesign Tab' selected={this.state.selectedTab === 'freedesign'} onPress={() => this.setState({selectedTab:'freedesign'})}>
-                <Design/>
-              </TabBarItemIOS>
-              <TabBarItemIOS name='shopcar' iconName='ion|ios-cart-outline' selectedIconName='ion|ios-cart' title='购物车' iconSize={28} selectedIconSize={30} accessibilityLabel='ShopCar Tab' selected={this.state.selectedTab === 'shopcar'} onPress={() => this.setState({selectedTab:'shopcar'})}>
-                <Cart/>
-              </TabBarItemIOS>
-              <TabBarItemIOS name='my' iconName='ion|ios-person-outline' selectedIconName='ion|ios-person' title='我' iconSize={28} selectedIconSize={30} accessibilityLabel='My Tab' selected={this.state.selectedTab === 'my'} onPress={() => this.setState({selectedTab:'my'})}>
-                <MyIndex/>
-              </TabBarItemIOS>
-            </TabBarIOS>
-        </View>
+      <View style={styles.container}>
+        <SearchBar/>
+        <TabBarIOS selectedTab={this.state.selectedTab} tintColor='#ff6600' barTintColor='#fff' style={styles.tabBar}>
+            {this._renderTabItem('home', 'ion|ios-home-outline', 'ion|ios-home', '首页', <Home/>)}
+            {this._renderTabItem('d3', 'ion|ios-location-outline', 'ion|ios-location', '3d商城', <D3/>)}
+            {this._renderTabItem('design', 'ion|ios-compose-outline', 'ion|ios-compose', '免费设计', <Design/>)}
+            {this._renderTabItem('cart', 'ion|ios-cart-outline', 'ion|ios-cart', '购物车', <Cart/>)}
+            {this._renderTabItem('myself', 'ion|ios-person-outline', 'ion|ios-person', '我', <MyIndex/>)}
+        </TabBarIOS>
+      </View>
     );
   },
+
+  _renderTabItem: function(name, iconName, selectedIconName, title, component) {
+    return (
+      <TabBarItemIOS name={name} iconName={iconName} selectedIconName={selectedIconName} title={title} iconSize={28} selectedIconSize={28} selected={this.state.selectedTab === name} onPress={() => this.setState({ selectedTab: name })}>
+        {component}
+      </TabBarItemIOS>
+    );
+  }
 
 });
 
@@ -60,10 +58,6 @@ var styles = StyleSheet.create({
     flex: 1
   },
   tabBar: {
-    flex: 1,
-    backgroundColor: '#eeeeee',
-    justifyContent: 'center',
-    alignItems: 'center',
   }
 });
 

@@ -47,21 +47,13 @@ module.exports = React.createClass({
 	},
 
 	render: function() {
-		// debugger;
 		return (
 	      <ScrollView contentContainerStyle={{}} style={styles.container}>
 	        <Banner/>
 
-	        {this._renderServices()}
+	        {this._renderMenu()}
 
-	        <Image
-	        	source={{
-	        		uri:'http://www.yuexing.com/static/data/files/mall/ad/logo/384.jpg'
-	        	}}
-	        	style={{
-	        		height:280
-	        	}}
-	        />
+	        {this._renderServices()}
 
 	      </ScrollView>
 		);
