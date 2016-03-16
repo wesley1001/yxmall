@@ -1,22 +1,16 @@
 'use strict';
 
-var React = require('react-native');
-
-var {
+import React,{
   AppRegistry,
   Component,
-  View,
-  Text
-} = React;
+} from 'react-native';
 
-// var Index = require('./app/android_src/index.js');
+var MainScreen = require('./app/android_src/MainScreen.js');
 
-var yxmall = React.createClass({
-  render: function() {
-    return <View>
-      <Text>您当前的环境是：android</Text>
-    </View>
+class yxmall extends Component {
+  render() {
+    return <MainScreen/>
   }
-});
+}
 
 AppRegistry.registerComponent('yxmall', () => yxmall);
