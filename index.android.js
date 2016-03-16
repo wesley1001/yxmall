@@ -5,7 +5,7 @@ import React,{
   Component,
 } from 'react-native';
 
-var MainScreen = require('./app/android_src/MainScreen.js');
+import MainScreen from './app/android_src/MainScreen.js';
 
 class yxmall extends Component {
   render() {
