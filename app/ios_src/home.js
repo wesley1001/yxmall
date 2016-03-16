@@ -3,7 +3,7 @@
 var React = require('react-native');
 var { Icon } = require('react-native-icons');
 
-var HomeSwiper = require('./components/Home-swiper.js');
+var Banner = require('./components/Banner.js');
 
 var {
 	View,
@@ -50,7 +50,7 @@ module.exports = React.createClass({
 		// debugger;
 		return (
 	      <ScrollView contentContainerStyle={{}} style={styles.container}>
-	        <HomeSwiper/>
+	        <Banner/>
 
 	        {this._renderServices()}
 

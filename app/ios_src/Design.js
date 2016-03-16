@@ -14,7 +14,7 @@ var {
 /**
  * 免费设计
  */
-var FreeDesign = React.createClass({
+module.exports = React.createClass({
 
 	getInitialState: function() {
 		return {
@@ -134,16 +134,29 @@ var styles = StyleSheet.create({
 		alignSelf: 'center',
 		color: '#888888',
 	},
-	formContainer: {marginTop:20},
-	row1: {flex:1,flexDirection:'row',height:40},
-	row2: {flex:1,height:40,marginBottom:7,marginTop:7},
+	formContainer: {
+		marginTop:20
+	},
+	row1: {
+		flex:1,
+		flexDirection:'row',
+		height:40
+	},
+	row2: {
+		flex:1,
+		height:40,
+		marginBottom:7,
+		marginTop:7
+	},
 	baseInput: {
 		borderColor:'#ddd',
 		borderWidth:1,
 		borderStyle:'solid',
 		borderRadius:7,
 	},
-	phoneInput: {flex:3},
+	phoneInput: {
+		flex:3
+	},
 	vertifyBtn: {
 		flex:1,
 		backgroundColor:'#ddd',
@@ -152,7 +165,9 @@ var styles = StyleSheet.create({
 		borderRadius:5,
 		marginLeft:7
 	},
-	vertifyText: {fontSize:18,color:'#fff'},
+	vertifyText: {
+		fontSize:18,color:'#fff'
+	},
 	vertifyInput: {
 		flex:1,
 	},
@@ -173,5 +188,3 @@ var styles = StyleSheet.create({
 		backgroundColor: '#ff6600'
 	}
 });
-
-module.exports = FreeDesign;

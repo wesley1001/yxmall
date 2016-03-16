@@ -10,7 +10,7 @@ var {
 	Image,
 } = React;
 
-var MyShopcar = React.createClass({
+module.exports = React.createClass({
 
 	getInitialState: function() {
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -157,5 +157,3 @@ const styles = StyleSheet.create({
 		borderStyle: 'solid',
 	}
 });
-
-module.exports = MyShopcar;
