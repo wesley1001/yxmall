@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react-native');
-var ValidateUtil = require('../utils/validateUtils.js');
+var ValidateUtil = require('../utils/ValidateUtils.js');
 
 var {
 	View,
