@@ -1,19 +1,20 @@
 'use strict';
 
 var React = require('react-native');
-var Index = require('./app/ios_src/index.js');
 
 var {
-  AppRegistry
+	AppRegistry
 } = React;
 
+var MainScreen = require('./app/ios_src/MainScreen.js');
+
 /**
- * app 入口文件
+ * app IOS 入口文件
  */
 var yxmall = React.createClass({
 
-  render: function() {
-    return (<Index/>);
+  render() {
+    return <MainScreen/>
   }
 
 });

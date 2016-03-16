@@ -3,7 +3,7 @@
 var React = require('react-native');
 var { Icon } = require('react-native-icons');
 
-var HomeSwiper = require('./components/home-swiper.js');
+var HomeSwiper = require('./components/Home-swiper.js');
 
 var {
 	View,
@@ -49,10 +49,8 @@ module.exports = React.createClass({
 	render: function() {
 		// debugger;
 		return (
-	      <ScrollView contentContainerStyle={{ }} style={styles.container}>
+	      <ScrollView contentContainerStyle={{}} style={styles.container}>
 	        <HomeSwiper/>
-
-	        {this._renderMenu()}
 
 	        {this._renderServices()}
 
@@ -99,14 +97,14 @@ module.exports = React.createClass({
 						source={{
 							uri: 'http://www.yuexing.com/static/mobile/images_new/address.jpg'
 						}}
-						style={{flex:2,height:90}}
+						style={{flex:2,height:90,resizeMode:'stretch'}}
 					/>
 					<TouchableOpacity activeOpacity={opacity} style={{flex:4,marginLeft:5}}>
 						<Image
 							source={{
 								uri: 'http://www.yuexing.com/static/mobile/images_new/freelunch.jpg'
 							}}
-							style={{height:90}}
+							style={{height:90,resizeMode:'stretch'}}
 						/>
 					</TouchableOpacity>
 				</View>
@@ -116,7 +114,7 @@ module.exports = React.createClass({
 							source={{
 								uri: 'http://www.yuexing.com/static/mobile/images_new/design.jpg'
 							}}
-							style={{height:185}}
+							style={{height:185,resizeMode:'stretch'}}
 						/>
 					</TouchableOpacity>
 					<View style={{flex:4,marginLeft:5}}>
@@ -125,7 +123,7 @@ module.exports = React.createClass({
 								source={{
 									uri: 'http://www.yuexing.com/static/mobile/images_new/art.jpg'
 								}}
-								style={{height:90}}
+								style={{height:90,resizeMode:'stretch'}}
 							/>
 						</TouchableOpacity>
 						<TouchableOpacity activeOpacity={opacity} style={{marginTop:5}}>
@@ -133,7 +131,7 @@ module.exports = React.createClass({
 								source={{
 									uri: 'http://www.yuexing.com/static/mobile/images_new/service.jpg'
 								}}
-								style={{height:90}}
+								style={{height:90,resizeMode:'stretch'}}
 							/>
 						</TouchableOpacity>
 					</View>

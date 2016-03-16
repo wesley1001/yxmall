@@ -14,7 +14,7 @@ module.exports = React.createClass({
 
 	getInitialState: function() {
 		return {
-			swiperImages: [
+			sliderImgs: [
 				{uri: 'http://www.yuexing.com/static/data/files/mall/ad/logo/394.jpg'},
 				{uri: 'http://www.yuexing.com/static/data/files/mall/ad/logo/396.jpg'},
 				{uri: 'http://www.yuexing.com/static/data/files/mall/ad/logo/384.jpg'},
@@ -24,11 +24,12 @@ module.exports = React.createClass({
 	},
 
 	render: function() {
+		var slides = this.state.sliderImgs.map(function(item, index){
+			return <Image key={'swiper' + index} style={styles.slide} source={item}/>;
+		});
 		return (
 			<Swiper style={styles.wrapper} height={240} autoplay={true} autoplayTimeout={3}>
-				{this.state.swiperImages.map(function(item, index){
-					return (<Image key={'swiper' + index} style={styles.slide} resizeMode='stretch' source={item}/>);
-				})}
+				{slides}
 	        </Swiper>
 		);
 	}
@@ -37,9 +38,9 @@ module.exports = React.createClass({
 
 var styles = StyleSheet.create({
 	wrapper: {
-		flex: 1,
 	},
 	slide: {
 		flex: 1,
+		resizeMode: 'stretch'
 	}
 });

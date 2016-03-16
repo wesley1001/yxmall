@@ -4,11 +4,11 @@ var React = require('react-native');
 var { TabBarIOS, } = require('react-native-icons');
 var TabBarItemIOS = TabBarIOS.Item;
 
-var Home = require('./home.js');
-var MyIndex = require('./my/index.js');
-var ShopCar = require('./my/shopcar.js');
-var FreeDesign = require('./freedesign.js');
-var ThreeD = require('./threeD.js');
+var Home = require('./Home.js');
+var MyIndex = require('./my/MyIndex.js');
+var ShopCar = require('./my/Shopcar.js');
+var FreeDesign = require('./Freedesign.js');
+var ThreeD = require('./ThreeD.js');
 
 var {
   StyleSheet,
@@ -19,11 +19,11 @@ var {
 /**
  * 首页
  */
-var Index = React.createClass({
+var MainScreen = React.createClass({
 
   getInitialState: function() {
     return {
-      selectedTab: 'shopcar',
+      selectedTab: 'home',
     };
   },
 
@@ -60,5 +60,5 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = Index;
+module.exports = MainScreen;
 
