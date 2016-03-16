@@ -4,6 +4,7 @@ var React = require('react-native');
 var { Icon } = require('react-native-icons');
 
 var Banner = require('./components/Banner.js');
+import MenuButtom from './components/MenuButton.js';
 
 var {
 	View,
@@ -54,6 +55,11 @@ module.exports = React.createClass({
 	        {this._renderMenu()}
 
 	        {this._renderServices()}
+
+	        <View style={styles.menuView}>
+	        	<MenuButtom onClick={this._onMenuClick} showText='我的关注' tag='wdgz' renderIcon={{uri:'http://static.blog.csdn.net/images/ico_rss.gif'}}/>
+	        	<MenuButtom onClick={this._onMenuClick} showText='物流查询' tag='wlcx' renderIcon={{uri:'http://static.blog.csdn.net/images/ico_Original.gif'}}/>
+	        </View>
 
 	      </ScrollView>
 		);
