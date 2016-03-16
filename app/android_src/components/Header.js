@@ -19,7 +19,7 @@ class Header extends Component {
     return (
       <View style={styles.container}>
         <View>
-          <Icon name='ion|beer' size={50} color='#666' style={styles.genre}/>
+          <Icon name='ion|beer' size={24} color='#666' style={styles.genre}/>
           <Text>分类</Text>
         </View>
         <View style={styles.searchBox}>
