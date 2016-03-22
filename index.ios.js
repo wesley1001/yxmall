@@ -5,7 +5,7 @@ import React,{
 	AppRegistry
 } from 'react-native';
 
-// import Main from './app/Main.ios.js';
-import IndexView from './app/IndexView.ios.js';
+import Main from './app/Main.ios.js';
+// import IndexView from './app/IndexView.ios.js';
 
-AppRegistry.registerComponent('yxmall', () => IndexView);
+AppRegistry.registerComponent('yxmall', () => Main);

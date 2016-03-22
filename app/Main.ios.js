@@ -1,10 +1,11 @@
 'use strict';
 
 import React,{
-  Component,
-  StyleSheet,
-  View,
-  Text
+    Component,
+    StyleSheet,
+    View,
+    Navigator,
+    Text
 } from 'react-native';
 
 import { TabBarIOS } from 'react-native-icons';
@@ -16,11 +17,11 @@ import Cart from './my/Cart.ios.js';
 import Design from './Design.ios.js';
 import D3 from './D3.ios.js';
 
-const HOME = 'home';
-const THREED = 'd3';
-const DESIGN = 'design';
-const CART = 'cart';
-const MYSELF = 'myself';
+const TAB1 = 'tab1';
+const TAB2 = 'tab2';
+const TAB3 = 'tab3';
+const TAB4 = 'tab4';
+const TAB5 = 'tab5';
 
 /**
  * 首页
@@ -30,7 +31,7 @@ export default class MainScreen extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          selectedTab: HOME,
+          selectedTab: TAB1,
       };
   }
 
@@ -38,11 +39,11 @@ export default class MainScreen extends Component {
       return (
           <View style={styles.container}>
               <TabBarIOS selectedTab={this.state.selectedTab} tintColor='#ff6600' barTintColor='#fff' style={styles.tabBar}>
-                  {this._renderTabItem(HOME, 'ion|ios-home-outline', 'ion|ios-home', '首页', <Home/>)}
-                  {this._renderTabItem(THREED, 'ion|ios-location-outline', 'ion|ios-location', '3d商城', <D3/>)}
-                  {this._renderTabItem(DESIGN, 'ion|ios-compose-outline', 'ion|ios-compose', '免费设计', <Design/>)}
-                  {this._renderTabItem(CART, 'ion|ios-cart-outline', 'ion|ios-cart', '购物车', <Cart/>)}
-                  {this._renderTabItem(MYSELF, 'ion|ios-person-outline', 'ion|ios-person', '我', <MyIndex/>)}
+                  {this._renderTabItem(TAB1, 'ion|ios-home-outline', 'ion|ios-home', '首页', Home)}
+                  {this._renderTabItem(TAB2, 'ion|ios-location-outline', 'ion|ios-location', '3d商城', D3)}
+                  {this._renderTabItem(TAB3, 'ion|ios-compose-outline', 'ion|ios-compose', '免费设计', Design)}
+                  {this._renderTabItem(TAB4, 'ion|ios-cart-outline', 'ion|ios-cart', '购物车', Cart)}
+                  {this._renderTabItem(TAB5, 'ion|ios-person-outline', 'ion|ios-person', '我', MyIndex)}
               </TabBarIOS>
           </View>
       );
@@ -51,7 +52,22 @@ export default class MainScreen extends Component {
   _renderTabItem(name, iconName, selectedIconName, title, component) {
       return (
           <TabBarItemIOS name={name} iconName={iconName} selectedIconName={selectedIconName} title={title} iconSize={28} selectedIconSize={28} selected={this.state.selectedTab === name} onPress={() => this.setState({ selectedTab: name })}>
-              {component}
+              <Navigator
+                  style={styles.container}
+                  initialRoute={{
+                     name: name,
+                     component: component
+                  }}
+                  configureScene={(route) => {
+                      return Navigator.SceneConfigs.HorizontalSwipeJumpFromRight;
+                  }}
+                  renderScene={(route, navigator) => {
+                     let Component = route.component;
+                     if (route.component) {
+                        return <Component {...route.params} navigator={navigator} />
+                     }
+                  }}
+              />
           </TabBarItemIOS>
       );
   }

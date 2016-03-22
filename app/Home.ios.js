@@ -11,6 +11,7 @@ import React, {
 	TouchableOpacity,
 	TouchableHighlight,
 	Alert,
+	Navigator,
 	PropTypes
 } from 'react-native';
 
@@ -206,15 +207,14 @@ class Home extends Component {
 	}
 
 	_pressProduct(productId) {
-		console.log('productId ', productId);
-		debugger;
-		// this.props.navigator.push({
-		// 	component: Details,
-		// 	title: '产品详情',
-		// 	passProps: {
-		// 		id: productId
-		// 	}
-		// });
+		var { navigator } = this.props;
+		navigator.push({
+			name: 'details',
+			component: Details,
+			params: {
+				id: productId
+			}
+		});
 	}
 
 }
