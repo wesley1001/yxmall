@@ -20,7 +20,7 @@ var ValidateUtil = {
 	/**
 	 * 校验是否为短信验证码
 	 */
-	isVertify: function(value) {
+	isCode: function(value) {
 		return /\d{4}/.test(value)
 	}
 

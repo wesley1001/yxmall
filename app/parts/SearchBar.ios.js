@@ -18,15 +18,15 @@ class SearchBar extends Component {
 		return (
 			<View style={styles.container}>
 				<View style={styles.iconBox}>
-					<Icon name='ion|navicon' size={28} style={styles.genre}/>
+					<Icon name='ion|navicon' size={28} style={styles.genre} color='#333'/>
 					<Text style={styles.iconTxt}>分类</Text>
 				</View>
 				<View style={styles.searchBox}>
 					<TextInput placeholder='搜索商品/店铺' style={styles.inputText}/>
-					<Icon name='ion|ios-search' size={20} style={styles.searchIcon}/>
+					<Icon name='ion|ios-search' size={20} style={styles.searchIcon} color='#333'/>
 				</View>
 				<View style={styles.iconBox}>
-					<Icon name='ion|chatbox-working' size={20} style={styles.msg}/>
+					<Icon name='ion|chatbox-working' size={20} style={styles.msg} color='#333'/>
 					<Text style={styles.iconTxt}>消息</Text>
 				</View>
 			</View>

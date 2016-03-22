@@ -1,75 +1,76 @@
 'use strict';
 
-var React = require('react-native');
-var ValidateUtil = require('../utils/ValidateUtils.js');
-
-var {
+import React, {
+	Component,
 	View,
 	StyleSheet,
 	Text,
 	TouchableHighlight,
-	TextInput,
-} = React;
+	TextInput
+} from 'react-native';
+
+var ValidateUtil = require('./utils/ValidateUtils.js');
 
 /**
  * 免费设计
  */
-module.exports = React.createClass({
+class Design extends Component {
 
-	getInitialState: function() {
-		return {
+	constructor(props) {
+		super(props);
+		this.state = {
 			phone: '',
-			vertify: '',
+			code: '',
 			isPhoneCorrect: false,
-			isVertifyCorrect: false,
-			vertifyText: '验证'
+			isCodeCorrect: false,
+			codeText: '验证'
 		};
-	},
+	}
 
-	_phoneChangeText: function(text) {
-		var code = this.refs.vertify._getText();
+	_phoneChangeText(text) {
+		var code = this.refs.code._getText();
 		this.setState({
 			phone: text,
 			isPhoneCorrect: ValidateUtil.isCellphone(text),
-			isVertifyCorrect: ValidateUtil.isVertify(code)
+			isCodeCorrect: ValidateUtil.isVertify(code)
 		});
-	},
+	}
 
-	_onChange: function(value) {
+	_onChange(value) {
 		console.log('onChange ', value);
-	},
+	}
 
-	_clearForm: function() {
+	_clearForm() {
 		this.setState({value:null});
-	},
+	}
 
-	_getCode: function(event) {
+	_getCode(event) {
 		//倒计时
 		var countdown = 30;
 		this.timer = setInterval(function(){
 			this.setState({
-				vertifyText: countdown--
+				codeText: countdown--
 			});
 		}.bind(this), 1000);
-	},
+	}
 
-	_onPress: function(event) {
+	_onPress(event) {
 		var phone = this.refs.phone._getText();
-		var vertify = this.refs.vertify._getText();
-		console.log('phone ' + phone + ', vertify ' + vertify);
+		var code = this.refs.code._getText();
+		console.log('phone ' + phone + ', code ' + code);
 		debugger;
-	},
+	}
 
-	_vertifyChangeText: function(text) {
+	_vertifyChangeText(text) {
 		var phone = this.refs.phone._getText();
 		this.setState({
-			vertify: text,
+			code: text,
 			isPhoneCorrect: ValidateUtil.isCellphone(phone),
-			isVertifyCorrect: ValidateUtil.isVertify(text)
+			isCodeCorrect: ValidateUtil.isCode(text)
 		});
-	},
+	}
 
-	render: function() {
+	render() {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.title}>月星免费软装设计</Text>
@@ -86,37 +87,37 @@ module.exports = React.createClass({
 						/>
 						<TouchableHighlight
 							ref='codeBtn'
-							style={[styles.vertifyBtn, this.state.isPhoneCorrect ? styles.available : null]}
+							style={[styles.codeBtn, this.state.isPhoneCorrect ? styles.available : null]}
 							onPress={this._getCode}
 							accessible={false}
 							underlayColor='#ff6633'>
-							<Text style={styles.vertifyText}>{this.state.vertifyText}</Text>
+							<Text style={styles.codeText}>{this.state.codeText}</Text>
 						</TouchableHighlight>
 					</View>
 					<View style={styles.row2}>
-						<TextInput ref='vertify'
-							style={[styles.baseInput, styles.vertifyInput]}
+						<TextInput ref='code'
+							style={[styles.baseInput, styles.codeInput]}
 							maxLength={4}
 							keyboardType='numeric'
 							onChangeText={this._vertifyChangeText}
 							placeholder='手机上收到的短信'
-							value={this.state.vertify}
+							value={this.state.code}
 						/>
 					</View>
 				</View>
 				<TouchableHighlight
-					style={[styles.button, this.state.isVertifyCorrect ? styles.available : null]}
+					style={[styles.button, this.state.isCodeCorrect ? styles.available : null]}
 					onPress={this._onPress}
 					underlayColor='#ff6633'>
 					<Text style={styles.buttonText}>立即预约</Text>
 				</TouchableHighlight>
 			</View>
 		);
-	},
+	}
 
-});
+}
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 	    padding: 20,
@@ -157,7 +158,7 @@ var styles = StyleSheet.create({
 	phoneInput: {
 		flex:3
 	},
-	vertifyBtn: {
+	codeBtn: {
 		flex:1,
 		backgroundColor:'#ddd',
 		alignItems:'center',
@@ -165,10 +166,10 @@ var styles = StyleSheet.create({
 		borderRadius:5,
 		marginLeft:7
 	},
-	vertifyText: {
+	codeText: {
 		fontSize:18,color:'#fff'
 	},
-	vertifyInput: {
+	codeInput: {
 		flex:1,
 	},
 	button: {
@@ -188,3 +189,5 @@ var styles = StyleSheet.create({
 		backgroundColor: '#ff6600'
 	}
 });
+
+module.exports = Design;

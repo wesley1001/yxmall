@@ -3,14 +3,22 @@
 import React,{
   AppRegistry,
   Component,
+  View,
+  Text
 } from 'react-native';
 
-import MainScreen from './app/android_src/MainScreen.js';
-
 class yxmall extends Component {
-  render() {
-    return <MainScreen/>
-  }
+	render() {
+		return (
+			<View style={{
+				flex:1,
+				justifyContent: 'center',
+				alignItems: 'center'
+			}}>
+				<Text>你好，欢迎访问月星智慧商城。</Text>
+			</View>
+		);
+	}
 }
 
 AppRegistry.registerComponent('yxmall', () => yxmall);
