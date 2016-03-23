@@ -1,22 +1,24 @@
 'use strict';
 
-var React = require('react-native');
-
-var {
+import React,{
   AppRegistry,
   Component,
   View,
   Text
-} = React;
+} from 'react-native';
 
-// var Index = require('./app/android_src/index.js');
-
-var yxmall = React.createClass({
-  render: function() {
-    return <View>
-      <Text>您当前的环境是：android</Text>
-    </View>
-  }
-});
+class yxmall extends Component {
+	render() {
+		return (
+			<View style={{
+				flex:1,
+				justifyContent: 'center',
+				alignItems: 'center'
+			}}>
+				<Text>你好，欢迎访问月星智慧商城。</Text>
+			</View>
+		);
+	}
+}
 
 AppRegistry.registerComponent('yxmall', () => yxmall);

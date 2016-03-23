@@ -1,21 +1,11 @@
 'use strict';
 
-var React = require('react-native');
-var Index = require('./app/ios_src/index.js');
+import React,{
+	Component,
+	AppRegistry
+} from 'react-native';
 
-var {
-  AppRegistry
-} = React;
+import Main from './app/Main.ios.js';
+// import IndexView from './app/IndexView.ios.js';
 
-/**
- * app 入口文件
- */
-var yxmall = React.createClass({
-
-  render: function() {
-    return (<Index/>);
-  }
-
-});
-
-AppRegistry.registerComponent('yxmall', () => yxmall);
+AppRegistry.registerComponent('yxmall', () => Main);
