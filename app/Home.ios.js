@@ -100,7 +100,8 @@ class Home extends Component {
 		return (
 			<View style={styles.container}>
 		        <SearchBar/>
-				<ScrollView contentContainerStyle={{}}>
+				<ScrollView contentContainerStyle={{}}
+					automaticallyAdjustContentInsets={false}>
 					<Banner slides={this.props.slides}/>
 
 					{this._renderMenu()}

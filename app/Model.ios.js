@@ -12,9 +12,9 @@ import React, {
 var ValidateUtil = require('./utils/ValidateUtils.js');
 
 /**
- * 免费设计
+ * 样板间
  */
-class Design extends Component {
+export default class Model extends Component {
 
 	constructor(props) {
 		super(props);
@@ -189,5 +189,3 @@ const styles = StyleSheet.create({
 		backgroundColor: '#ff6600'
 	}
 });
-
-module.exports = Design;
