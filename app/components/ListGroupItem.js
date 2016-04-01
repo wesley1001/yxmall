@@ -18,6 +18,7 @@ export default class MyIndex extends Component {
 		items: PropTypes.array.isRequired,
 		renderHeader: PropTypes.func,
 		renderFooter: PropTypes.func,
+		style: ListView.propTypes.style
 	};
 
 	constructor(props) {
@@ -36,22 +37,29 @@ export default class MyIndex extends Component {
 				dataSource={this.state.dataSource}
 				renderRow={this._renderRow}
 				renderHeader={this.props.renderHeader}
-				rehderFooter={this.props.renderFooter}
+				renderFooter={this.props.renderFooter}
+				style={this.props.style}
 			/>
 		);
 	}
 
 	_renderRow(rowData, sectionId, rowIndex, highlighRow) {
+		var leftIcon = null;
+		if(rowData.icon) {
+			leftIcon = <View style={styles.left}>
+				<Icon name={rowData.icon} size={24} color='#333' style={styles.icon} />
+			</View>
+		} else {
+			leftIcon = <View style={[styles.left,{width:10}]}></View>
+		}
 		return (
 			<TouchableHighlight underlayColor='#ddd' onPress={rowData.onPress}>
 				<View style={styles.rowContainer}>
-					<View style={[styles.cell, {flex: 1}]}>
-						<Icon name={rowData.icon} size={24} color='#333' style={styles.icon} />
-					</View>
-					<View style={[styles.cell, {flex: 6}]}>
+					{leftIcon}
+					<View style={styles.center}>
 						<Text>{rowData.value}</Text>
 					</View>
-					<View style={[styles.cell, {flex: 1}]}>
+					<View style={styles.right}>
 						<Icon name='ion|ios-arrow-right' size={24} color='#333' style={styles.icon} />
 					</View>
 				</View>
@@ -66,11 +74,21 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		borderBottomWidth: 1,
 		borderColor: '#eee',
-		borderStyle: 'solid'
+		borderStyle: 'solid',
+		height: 50
 	},
-	cell: {
-		height: 50,
+	left: {
+		width: 40,
+		backgroundColor: '#fff'
+	},
+	center: {
+		flex: 1,
+		height: 49,
 		justifyContent: 'center',
+		backgroundColor: '#fff'
+	},
+	right: {
+		width: 40,
 		backgroundColor: '#fff'
 	},
 	icon: {
