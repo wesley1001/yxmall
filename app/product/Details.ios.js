@@ -10,6 +10,7 @@ import React, {
 export default class Details extends Component {
 
 	render() {
+		var { navigator, route } = this.props;
 		return (
 			<View style={styles.container}>
 				<Text>产品详情页 {this.props.id}</Text>

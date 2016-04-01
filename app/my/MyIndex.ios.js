@@ -7,74 +7,80 @@ import React,{
 	View,
 	StyleSheet,
 	TouchableHighlight,
+	NavigatorIOS,
 	Image,
-	AlertIOS
+	Alert
 } from 'react-native';
 
 import { Icon } from 'react-native-icons';
 
 import ListGroupItem from '../components/ListGroupItem.js';
+import Login from './Login.ios.js';
 
-class MyIndex extends Component {
+const BUTTOM_LIST = [
+	{
+		value: '全部订单',
+		icon: 'ion|compose',
+		onPress: function(event){
+			Alert.alert('全部订单');
+		}
+	},
+	{
+		value: '聊天记录',
+		icon: 'ion|chatboxes',
+		onPress: function(event){
+			Alert.alert('聊天记录');
+		}
+	},
+	{
+		value: '我的收藏',
+		icon: 'ion|heart',
+		onPress: function(event){
+			Alert.alert('我的收藏')
+		}
+	},
+	{
+		value: '我的足迹',
+		icon: 'ion|ios-world-outline',
+		onPress: function(event){
+			Alert.alert('我的足迹');
+		}
+	},
+	{
+		value: '收货地址',
+		icon: 'ion|help-buoy',
+		onPress: function(event){
+			Alert.alert('收货地址');
+		}
+	},
+	{
+		value: '红包管理',
+		icon: 'ion|briefcase',
+		onPress: function(event){
+			Alert.alert('红包管理');
+		}
+	},
+	{
+		value: '基本设置',
+		icon: 'ion|ios-cog-outline',
+		onPress: function(event){
+			Alert.alert('基本设置');
+		}
+	}
+]
+
+export default class MyIndex extends Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {
+			logined: false
+		}
 	}
 
 	render() {
-		var items = [
-			{
-				value: '全部订单',
-				icon: 'ion|compose',
-				onPress: function(event){
-					console.log('全部订单')
-				}
-			},
-			{
-				value: '聊天记录',
-				icon: 'ion|chatboxes',
-				onPress: function(event){
-					console.log('聊天记录')
-				}
-			},
-			{
-				value: '我的收藏',
-				icon: 'ion|heart',
-				onPress: function(event){
-					console.log('我的收藏')
-				}
-			},
-			{
-				value: '我的足迹',
-				icon: 'ion|ios-world-outline',
-				onPress: function(event){
-					console.log('我的足迹', event);
-				}
-			},
-			{
-				value: '收货地址',
-				icon: 'ion|help-buoy',
-				onPress: function(event){
-					console.log('收货地址', event);
-				}
-			},
-			{
-				value: '红包管理',
-				icon: 'ion|briefcase',
-				onPress: function(event){
-					console.log('红包管理', event);
-				}
-			},
-			{
-				value: '基本设置',
-				icon: 'ion|ios-cog-outline',
-				onPress: function(event){
-					console.log('基本设置', event);
-				}
-			},
-		]
 		return (
-			<ListGroupItem items={items} renderHeader={this._renderHeader} onItemPress={this._onItemPress}/>
+			<ListGroupItem items={BUTTOM_LIST} renderHeader={this._renderHeader}/>
 		);
 	}
 
@@ -114,5 +120,3 @@ const styles = StyleSheet.create({
 		marginTop: 7,
 	}
 });
-
-module.exports = MyIndex;

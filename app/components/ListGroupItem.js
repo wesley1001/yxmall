@@ -18,7 +18,6 @@ export default class MyIndex extends Component {
 		items: PropTypes.array.isRequired,
 		renderHeader: PropTypes.func,
 		renderFooter: PropTypes.func,
-		onItemPress: PropTypes.func
 	};
 
 	constructor(props) {
